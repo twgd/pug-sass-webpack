@@ -11,9 +11,10 @@ module.exports = (env) => {
     context: path.resolve(__dirname, 'src'),
     entry: './index.js',
     output: {
-      filename: 'bundle.js',
+      filename: '[name].[contenthash:6].bundle.js',
       path: path.resolve(__dirname, 'dist'),
       clean: true,
+      assetModuleFilename: 'assets/[hash][ext][query]',
     },
     devtool: env.production ? 'source-map' : 'inline-source-map',
     module: {
@@ -40,6 +41,9 @@ module.exports = (env) => {
         {
           test: /\.(png|svg|jpg|jpeg|gif)$/i,
           type: 'asset/resource',
+          generator: {
+            filename: 'images/[hash][ext][query]',
+          },
         },
       ],
     },
