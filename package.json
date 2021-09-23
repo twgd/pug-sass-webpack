@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "webpack --env production",
-    "watch": "webpack --watch",
     "start": "webpack serve --open",
+    "build": "webpack --env production",
     "deploy": "gh-pages -d dist"
   },
   "license": "MIT",
