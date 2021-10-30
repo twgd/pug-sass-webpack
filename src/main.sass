@@ -1,12 +1,1164 @@
 @import './styles/_fonts'
 
-$body-color: red
+$color_background: #DFE0DB
+$color_pink: #F76BC5
+$color_blue: #3DB5C7
+$color_black: #4F5052
+$color_white: #FFFDF7
 
-p
-  color: $body-color
+// 置中
+@mixin center
+  position: absolute
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%)
 
-.hello
-  color: blue
+// 三大粉紅色標題文字(about\works\contact)
+@mixin large_top_title
+  color: $color_pink
+  font-size: 52px
+  letter-spacing: 12px
+  margin: 0 0 40px 0
 
-img
-  max-height: 500px
+@mixin small_top_title
+  font-size: 40px
+  letter-spacing: 8px
+  margin: 0
+
+// 三大區塊 margin
+@mixin large_margin
+  margin: 0 60px
+
+@mixin middle_margin
+  margin: 0 40px
+
+@mixin small_margin
+  margin: 0 20px
+
+
+// 粉紅色標題線
+@mixin line
+  width: 30px
+  height: 2px
+  background-color: $color_pink
+  border: 1px
+  border-radius: 3px
+  margin: 3px 0
+
+// 粉紅色標題線旁標題
+@mixin large_title
+  margin: 0 0 0 16px
+  font-size: 20px
+  letter-spacing: 6px
+
+// 年份區塊
+@mixin year
+  color: #ffffff
+  font-size: 12px
+  background-color: $color_pink
+  opacity: 0.4
+  padding: 2px 6px
+  margin: 0
+
+body
+  margin: 0
+  padding: 0
+  width: 100%
+  height: 100%
+  background: $color_background
+
+*
+  color: $color_black
+  letter-spacing: 2px
+  vertical-align: middle
+  position: relative
+  user-select: none
+  font-family: 繁黑體
+
+//- nav
+nav.nav
+  .nav_content
+    display: flex
+    justify-content: space-between
+    margin: 32px 32px
+    .nav_right
+      img
+        width: 60%
+        cursor: pointer
+    label
+      input#nav_switch
+        display: none
+      .nav_humburger
+        display: none
+        cursor: pointer
+      .nav_left
+        display: flex
+        .nav_text
+          color: $color_pink
+          font-size: 28px
+          letter-spacing: 8px
+          cursor: pointer
+        .nav_text ~ .nav_text
+          margin: 0 0 0 40px
+
+      input#nav_switch:checked+.nav_left
+        color: red
+        font-size: 100px
+
+
+
+//- header
+header.header
+  height: 100vh
+  .header_content
+    position: absolute
+    left: 50%
+    transform: translateX(-50%)
+    //- 上方圖logo 圖片區
+    .header_top
+      img.header_top_logo
+        width: 70%
+        margin: 60px 20%
+        transform: translateX(-10%)
+      img.header_top_name
+        width: 20%
+        position: absolute
+        top: 50%
+        left: 85%
+
+    //- 下方文字區
+    .header_middle
+      text-align: center
+      .header_middle_content
+        display: flex
+        flex-direction: column
+        align-items: center
+        margin: 0 0 16px 0
+        .header_middle_title
+          color: $color_blue
+          font-size: 18px
+          margin: 0 0 8px 0
+        .header_middle_text
+          font-size: 16px
+          margin: 0 0 8px 0
+          line-height: 26px
+        .header_middle_text.small_screen
+          display: none
+        //- 按鈕
+        img.header_bottom_button
+          width: 48px
+          cursor: pointer
+          margin: 40px 0 0 0
+
+// about 和 works 共通設定
+.container
+  +large_margin
+  .container_title
+    +large_top_title
+
+//- about
+.about.container
+  //- 教育程度、技能、證書
+  .about_group
+    display: flex
+    justify-content: space-between
+    .about_top_content
+      width: 30%
+      .about_top_title
+        display: flex
+        align-items: center
+        .about_top_title_line
+          hr
+            +line
+        .about_top_title_text
+          +large_title
+      .about_top_image
+        img
+          width: 100%
+          margin: 10px 0 28px 0
+      .about_top_detail
+        display: flex
+        align-items: center
+        .about_top_detail_cross
+          margin: 0 28px 0 0
+          font-size: 28px
+        .about_top_detail_content
+          width: 100%
+          .about_top_detail_content_block
+            display: flex
+            justify-content: space-between
+
+    //- 教育程度
+    .about_top_content
+      .about_top_detail
+        display: flex
+        flex-direction: column
+        .about_top_detail_wrapper ~ .about_top_detail_wrapper
+          margin: 24px 0 0 0
+        .about_top_detail_wrapper
+          width: 100%
+          display: flex
+          align-items: center
+          .about_top_detail_cross.none
+            opacity: 0
+          .about_top_detail_cross
+            margin: 0 28px 0 0
+            font-size: 28px
+          .about_top_detail_content
+            width: 100%
+            .about_top_detail_content_block
+              display: flex
+              flex-direction: column
+              .about_top_detail_content_block_top
+                display: flex
+                justify-content: space-between
+                p.chinese
+                  margin: 0
+                .year_wrapper
+                  p.year
+                    +year
+              .about_top_detail_content_block_botton
+                p.english
+                  font-size: 10px
+                  margin: 12px 0 0 0
+    //- 技能
+    .about_top_content.skills
+      .about_top_detail
+        .about_top_detail_content
+          display: flex
+          flex-direction: row
+          justify-content: space-between
+          .about_top_detail_content_block
+            display: flex
+            flex-direction: column
+            pre.about_top_detail_content_block_row
+              font-size: 14px
+              margin: 0 0 8px 0
+    //- 證書
+    .about_top_content.certificate
+      .about_top_detail
+        .about_top_detail_wrapper
+          .about_top_detail_content
+            .about_top_detail_content_block
+              .about_top_detail_content_block_botton
+                p.english
+                  font-size: 16px
+  //- 工作經歷
+  .about_group
+    margin: 80px 0 0 0
+    .about_top_content.experience
+      width: 100%
+      //- 整合行銷企劃_標題
+      .about_marketing_title_wrapper
+        display: flex
+        align-items: center
+        justify-content: space-between
+        width: 30%
+        margin: 32px 0 40px 0
+        .about_marketing_title_wrapper_block
+          display: flex
+          align-items: center
+          p.cross
+            font-size: 28px
+            margin: 0 28px 0 0
+          p.title
+            font-size: 20px
+        .year_wrapper
+          p.year
+            +year
+      //- 八張圖片_集合
+      .about_marketing_container
+        width: 100%
+        display: flex
+        justify-content: space-between
+        flex-wrap: wrap
+        //- 偽區塊
+        .about_marketing_block.fake_block
+          opacity: 0
+        //- 區塊
+        .about_marketing_block
+          width: 30%
+          background-color: #fff
+          margin: 0 0 40px 0
+          border-radius: 16px
+          box-shadow:1px 1px 24px 1px rgba(#000000, 0.16)
+          .about_marketing_picture
+            img
+              width: 100%
+              border-radius: 16px 16px 0 0
+          .about_marketing_content
+            padding: 32px 8%
+            .about_marketing_content_title_wrapper
+              display: flex
+              align-items: center
+              margin: 0 0 24px 0
+              p.name
+                font-size: 24px
+                margin: 0
+              pre.sort
+                font-size: 16px
+                margin: 0 0 0 12px
+            .about_marketing_content_detail
+              font-size: 12px
+              line-height: 24px
+              color: rgb($color_black, 0.6)
+      //- 其他_標題
+      .about_other
+        margin: 20px 0 0 0
+        .about_other_block
+          width: 80%
+          margin: 0 0 60px 0
+          .about_other_block_container
+            display: flex
+            align-items: center
+            .about_other_block_cross
+              font-size: 28px
+              margin: 0 28px 0 0
+            .about_other_block_cross.none
+              opacity: 0
+            .about_other_block_detail_wrapper
+              display: flex
+              justify-content: space-between
+              width: 100%
+              .about_other_block_detail_title_wrapper
+                pre.about_other_block_detail_title
+                  font-size: 20px
+                  margin: 0
+              .about_other_block_detail_year_wrapper
+                p.year
+                  +year
+                p.year.width
+                  padding: 2px 30px
+            .about_other_block_detail_text
+              font-size: 16px
+              color: rgba($color_black, 0.6)
+              margin: 24px 0 0 0
+
+//- works
+.works.container
+  //- works 上方標題文字及圖片
+  .works_title_block
+    .works_title_wrapper
+      display: flex
+      align-items: center
+      .works_title_line
+        hr
+          +line
+      .works_title_text
+        +large_title
+    .works_title_image
+      img
+        width: 100%
+        margin: 10px 0 0 0
+  //- 毛天使、欣湛、瑪莉雅之吻、雅莉珊卓、富盛豐共同設定
+  .works_block
+    .works_block_title_wrapper
+      display: flex
+      align-items: center
+      margin: 40px 0 0 0
+      .works_block_title_cross
+        font-size: 28px
+        margin: 0 28px 0 0
+      .works_block_title_name
+        font-size: 20px
+      pre.works_block_title_sort
+        font-size: 14px
+        margin: 0 0 0 14px
+    label
+      cursor: pointer
+      // MORE 按鈕
+      pre.works_more_button
+        margin: 32px auto 0 auto
+        padding: 8px 8px
+        width: 100%
+        font-size: 28px
+        text-align: center
+        font-weight: 500
+        letter-spacing: 4px
+        border: 2px solid $color_blue
+        background-color: $color_blue
+        color: $color_background
+        border-radius: 60px
+        width: 120px
+        box-shadow:1px 1px 4px 1px rgba($color_blue, 0.25)
+        transition-duration: 0.3s
+        &:hover
+          border: 2px solid $color_black
+          background-color: $color_black
+          box-shadow:1px 1px 4px 1px rgba($color_black, 0.25)
+          transform: scale(1.1)
+      // checkbox
+      #switch
+        display: none
+      #switch:checked+.label_wrapper
+        height: 100%
+        // height: 800px
+      // 各個隱藏高度尺寸
+      .label_wrapper
+        height: 360px
+        overflow: hidden
+        // transition-duration: 0.5s
+        .works_block_content
+          .works_block_content_title
+            font-size: 14px
+            margin: 52px 0 0 0
+          .works_block_content_image_wrapper
+            display: flex
+            justify-content: space-between
+            flex-wrap: wrap
+            img
+              height: 240px
+              border-radius: 16px
+              margin: 32px 0 0 0
+            // 毛天使 偽圖片
+            img.fack_picture.petangel
+              display: none
+            // 瑪莉雅之吻 偽圖片
+            img.maria.fack_picture
+              display: none
+            // 雅莉珊卓 偽圖片
+            img.fack_picture
+              opacity: 0
+          .works_block_content_image_wrapper.typesetting_start
+            justify-content: flex-start
+            img
+              margin: 32px 32px 0 0
+          .works_block_content_image_wrapper.typesetting_start.img_small_height
+            img
+              height: 180px
+
+//- contact
+.contact.container
+  margin-top: 120px
+  //- 下方三區塊
+  .contact_container
+    display: flex
+    justify-content: space-between
+    width: 100%
+    .contact_block
+      display: flex
+      flex-direction: column
+      align-items: center
+      justify-content: center
+      width: 30%
+      text-align: center
+      background-color: $color_white
+      padding: 24px 8px
+      border-radius: 24px
+      box-shadow:1px 1px 24px 1px rgba(#000000, 0.16)
+      img
+        width: 120px
+      pre.contact_block_text
+        font-size: 20px
+        margin: 24px 0 0 0
+        width: 100%
+        user-select: text
+  //- 底部 logo
+  .contact_logo_wrapper
+    position: absolute
+    left: 50%
+    transform: translateX(-50%)
+    img.contact_logo
+      width: 50%
+      margin: 80px 20%
+      // transform: translateX(-10%)
+    img.contact_plane
+      width: 30%
+      position: absolute
+      top: 35%
+      left: 70%
+
+
+// RWD
+
+//- nav
+@media screen and (max-width: 770px)
+  nav.nav
+    .nav_content
+      margin: 32px 32px
+      .nav_right
+        img
+          width: 60%
+      label
+        input#nav_switch
+        .nav_left
+          display: none
+          .nav_text
+            font-size: 28px
+            letter-spacing: 8px
+          .nav_text ~ .nav_text
+            margin: 0 0 0 40px
+        .nav_humburger
+          display: block
+          hr
+            +line
+            margin: 6px 0
+
+
+//- header
+@media screen and (max-width: 1048px)
+  header.header
+    height: 750px
+    .header_content
+      width: 600px
+
+@media screen and (max-width: 770px)
+  header.header
+    .header_content
+      width: 530px
+
+@media screen and (max-width: 680px)
+  header.header
+    .header_content
+      width: 440px
+
+@media screen and (max-width: 570px)
+  header.header
+    .header_content
+      width: 380px
+      //- 下方文字區
+      .header_middle
+        .header_middle_content
+          .header_middle_text.large_screen
+            display: none
+          .header_middle_text.small_screen
+            display: block
+
+@media screen and (max-width: 530px)
+  header.header
+    .header_content
+      width: 330px
+      //- 下方文字區
+      .header_middle
+        .header_middle_content
+          .header_middle_title
+            font-size: 16px
+          .header_middle_text
+            font-size: 14px
+          //- 按鈕
+          img.header_bottom_button
+            width: 40px
+            margin: 40px 0 0 0
+
+@media screen and (max-width: 430px)
+  header.header
+    .header_content
+      width: 300px
+      //- 下方文字區
+      .header_middle
+        .header_middle_content
+          .header_middle_title
+            font-size: 14px
+          .header_middle_text
+            font-size: 14px
+
+// about 和 works 共通設定
+@media screen and (max-width: 720px)
+  .container
+    +middle_margin
+
+@media screen and (max-width: 570px)
+  .container
+    .container_title
+      +small_top_title
+
+@media screen and (max-width: 400px)
+  .container
+    +small_margin
+
+//- about
+
+//- 教育程度、技能、證書
+@media screen and (max-width: 980px)
+  .about.container
+    .about_group
+      .about_top_content
+        .about_top_detail
+          .about_top_detail_cross
+            display: none
+      //- 技能
+      .about_top_content.skills
+        .about_top_detail
+          .about_top_detail_content
+            .about_top_detail_content_block
+              pre.about_top_detail_content_block_row
+                font-size: 12px
+
+@media screen and (max-width: 880px)
+  .about.container
+    .about_group
+      flex-wrap: wrap
+      .about_top_content
+        width: 45%
+        .about_top_detail
+          .about_top_detail_cross
+            display: block
+      .about_top_content:nth-child(3)
+        margin: 52px 0 0 0
+
+@media screen and (max-width: 720px)
+  .about.container
+    .about_group
+      .about_top_content
+        width: 46%
+        .about_top_detail
+          .about_top_detail_cross
+            display: none
+
+@media screen and (max-width: 570px)
+  .about.container
+    .about_group
+      flex-direction: column
+      .about_top_content ~ .about_top_content
+        margin: 52px 0 0 0
+      .about_top_content
+        width: 100%
+      //- 技能
+      .about_top_content.skills
+        .about_top_detail
+          .about_top_detail_content
+            .about_top_detail_content_block
+              pre.about_top_detail_content_block_row
+                font-size: 16px
+
+@media screen and (max-width: 430px)
+  .about.container
+    .about_group
+      //- 技能
+      .about_top_content.skills
+        .about_top_detail
+          .about_top_detail_content
+            .about_top_detail_content_block
+              pre.about_top_detail_content_block_row
+                font-size: 14px
+
+
+//- 工作經歷
+@media screen and (max-width: 1240px)
+  .about.container
+    .about_group
+      .about_top_content.experience
+        //- 八張圖片_集合
+        .about_marketing_container
+          //- 區塊
+          .about_marketing_block
+            .about_marketing_content
+              .about_marketing_content_title_wrapper
+                p.name
+                  font-size: 20px
+                pre.sort
+                  font-size: 14px
+                  margin: 0 0 0 6px
+
+@media screen and (max-width: 1104px)
+  .about.container
+    .about_group
+      .about_top_content.experience
+        .about_marketing_title_wrapper
+          width: 40%
+        //- 八張圖片_集合
+        .about_marketing_container
+          //- 區塊
+          .about_marketing_block
+            .about_marketing_content
+              .about_marketing_content_title_wrapper
+                p.name
+                  font-size: 16px
+                pre.sort
+                  font-size: 12px
+                  margin: 0 0 0 4px
+
+@media screen and (max-width: 964px)
+  .about.container
+    .about_group
+      .about_top_content.experience
+        //- 八張圖片_集合
+        .about_marketing_container
+          //- 區塊
+          .about_marketing_block
+            .about_marketing_content
+              padding: 32px 8%
+              .about_marketing_content_title_wrapper
+                flex-direction: column
+                p.name
+                  font-size: 16px
+                pre.sort
+                  font-size: 12px
+                  margin: 0 0 0 6px
+
+@media screen and (max-width: 900px)
+  .about.container
+    .about_group
+      .about_top_content.experience
+        .about_marketing_title_wrapper
+          width: 46%
+        //- 八張圖片_集合
+        .about_marketing_container
+          //- 區塊
+          .about_marketing_block
+            width: 46%
+            flex-wrap: wrap
+            .about_marketing_content
+              .about_marketing_content_title_wrapper
+                flex-direction: row
+                p.name
+                  font-size: 20px
+                pre.sort
+                  font-size: 16px
+                  margin: 4px 0 0 4px
+          // 偽區塊
+          .about_marketing_block.fake_block
+            display: none
+
+@media screen and (max-width: 820px)
+  .about.container
+    .about_group
+      .about_top_content.experience
+        .about_marketing_title_wrapper
+          width: 100%
+        //- 八張圖片_集合
+        .about_marketing_container
+          //- 區塊
+          .about_marketing_block
+            .about_marketing_content
+              .about_marketing_content_title_wrapper
+                p.name
+                  font-size: 16px
+                pre.sort
+                  font-size: 12px
+                  margin: 0 0 0 6px
+
+@media screen and (max-width: 640px)
+  .about.container
+    .about_group
+      .about_top_content.experience
+        //- 八張圖片_集合
+        .about_marketing_container
+          //- 區塊
+          .about_marketing_block
+            .about_marketing_content
+              padding: 16px 8%
+              .about_marketing_content_title_wrapper
+                flex-direction: column
+                margin: 0 0 12px 0
+                p.name
+                  font-size: 16px
+                pre.sort
+                  font-size: 12px
+                  margin: 4px 0 0 4px
+
+@media screen and (max-width: 500px)
+  .about.container
+    .about_group
+      .about_top_content.experience
+        .about_marketing_title_wrapper
+          width: 100%
+          .about_marketing_title_wrapper_block
+            p.cross
+              font-size: 20px
+              margin: 0 16px 0 0
+            p.title
+              font-size: 16px
+        //- 八張圖片_集合
+        .about_marketing_container
+          //- 區塊
+          .about_marketing_block
+            width: 100%
+            .about_marketing_content
+              padding: 32px 8%
+              .about_marketing_content_title_wrapper
+                flex-direction: row
+                p.name
+                  font-size: 20px
+                pre.sort
+                  font-size: 16px
+                  margin: 4px 0 0 4px
+
+@media screen and (max-width: 360px)
+  .about.container
+    .about_group
+      .about_top_content.experience
+        //- 八張圖片_集合
+        .about_marketing_container
+          //- 區塊
+          .about_marketing_block
+            .about_marketing_content
+              padding: 32px 8%
+              .about_marketing_content_title_wrapper
+                p.name
+                  font-size: 16px
+                pre.sort
+                  font-size: 12px
+                  margin: 0 0 0 6px
+
+//- 其他_標題
+@media screen and (max-width: 1000px)
+  .about.container
+    .about_group
+      .about_top_content.experience
+        .about_other
+          .about_other_block
+            width: 100%
+
+@media screen and (max-width: 780px)
+  .about.container
+    .about_group
+      .about_top_content.experience
+        .about_other
+          margin: 20px 0 0 0
+          .about_other_block
+            width: 100%
+            margin: 0 0 30px 0
+            .about_other_block_container
+              .about_other_block_cross
+                font-size: 28px
+                margin: 0 28px 0 0
+              .about_other_block_detail_wrapper
+                width: 100%
+                .about_other_block_detail_title_wrapper
+                  pre.about_other_block_detail_title
+                    font-size: 16px
+                .about_other_block_detail_year_wrapper
+                  p.year.width
+                    padding: 2px 30px
+              .about_other_block_detail_text
+                font-size: 12px
+                margin: 0
+
+@media screen and (max-width: 460px)
+  .about.container
+    .about_group
+      .about_top_content.experience
+        .about_other
+          .about_other_block
+            .about_other_block_container
+              .about_other_block_detail_wrapper
+                .about_other_block_detail_title_wrapper
+                  pre.about_other_block_detail_title
+                    font-size: 12px
+                    font-weight: 500
+
+@media screen and (max-width: 350px)
+  .about.container
+    .about_group
+      .about_top_content.experience
+        .about_marketing_title_wrapper
+          margin: 0px 0 24px 0
+          .about_marketing_title_wrapper_block
+            p.cross
+              display: none
+        .about_other
+          .about_other_block
+            .about_other_block_container
+              .about_other_block_cross
+                display: none
+
+//- works
+@media screen and (max-width: 1200px)
+  .works.container
+    //- 毛天使、欣湛、瑪莉雅之吻、雅莉珊卓、富盛豐共同設定
+    .works_block
+      label
+        // 各個隱藏高度尺寸 - 富盛豐
+        .label_wrapper.brand_fu
+          height: 320px
+        .label_wrapper
+          .works_block_content
+            .works_block_content_image_wrapper
+              // 毛天使 偽圖片
+              img.fack_picture.petangel
+                display: block
+              // 雅莉珊卓 偽圖片
+              img.fack_picture:nth-child(13)
+                display: none
+              img.fack_picture:nth-child(14)
+                display: none
+              // 富盛豐 圖片高度
+              img.fu
+                height: 200px
+
+@media screen and (max-width: 1126px)
+  .works.container
+    //- 毛天使、欣湛、瑪莉雅之吻、雅莉珊卓、富盛豐共同設定
+    .works_block
+      label
+        // 各個隱藏高度尺寸
+        .label_wrapper
+          .works_block_content
+            .works_block_content_image_wrapper
+              // 毛天使 偽圖片
+              img.fack_picture.petangel
+                display: block
+              // 雅莉珊卓 偽圖片
+              img.fack_picture:nth-child(11)
+                display: none
+              img.fack_picture:nth-child(12)
+                display: none
+              img.fack_picture:nth-child(13)
+                display: none
+              img.fack_picture:nth-child(14)
+                display: none
+
+@media screen and (max-width: 1062px)
+  .works.container
+    //- 毛天使、欣湛、瑪莉雅之吻、雅莉珊卓、富盛豐共同設定
+    .works_block
+      label
+        // 各個隱藏高度尺寸 - 瑪莉雅之吻
+        .label_wrapper.brand_maria
+          height: 300px
+          .works_block_content
+            .works_block_content_image_wrapper
+              img.maria
+                height: 180px
+
+
+@media screen and (max-width: 860px)
+  .works.container
+    //- 毛天使、欣湛、瑪莉雅之吻、雅莉珊卓、富盛豐共同設定
+    .works_block
+      label
+        // MORE 按鈕
+        pre.works_more_button
+          transform: scale(0.7)
+          &:hover
+            transform: scale(0.8)
+        // 各個隱藏高度尺寸
+        .label_wrapper
+          height: 300px
+          .works_block_content
+            .works_block_content_image_wrapper
+              img
+                height: 180px
+
+@media screen and (max-width: 826px)
+  .works.container
+    //- 毛天使、欣湛、瑪莉雅之吻、雅莉珊卓、富盛豐共同設定
+    .works_block
+      label
+        // 各個隱藏高度尺寸
+        .label_wrapper
+          height: 300px
+        .label_wrapper.brand_maria
+          height: 280px
+          .works_block_content
+            .works_block_content_image_wrapper
+              img
+                height: 150px
+              img.maria
+                height: 150px
+
+@media screen and (max-width: 666px)
+  .works.container
+    //- 毛天使、欣湛、瑪莉雅之吻、雅莉珊卓、富盛豐共同設定
+    .works_block
+      label
+        // 各個隱藏高度尺寸
+        .label_wrapper.brand_fu
+          height: 220px
+        .label_wrapper
+          .works_block_content
+            .works_block_content_image_wrapper
+              // 富盛豐 圖片高度
+              img.fu
+                height: 100px
+        .label_wrapper.brand_maria
+          .works_block_content
+            .works_block_content_image_wrapper
+              // 瑪莉雅之吻 偽圖片
+              img.maria.fack_picture:nth-child(21)
+                display: block
+            .works_block_content_image_wrapper.typesetting_start.img_small_height
+              img
+                height: 120px
+                margin: 24px 24px 0 0
+
+@media screen and (max-width: 600px)
+  .works.container
+    //- 毛天使、欣湛、瑪莉雅之吻、雅莉珊卓、富盛豐共同設定
+    .works_block
+      label
+        // 各個隱藏高度尺寸
+        .label_wrapper
+          .works_block_content
+            .works_block_content_image_wrapper
+              // 毛天使 偽圖片
+              img.fack_picture.petangel
+                display: none
+
+@media screen and (max-width: 584px)
+  .works.container
+    //- 毛天使、欣湛、瑪莉雅之吻、雅莉珊卓、富盛豐共同設定
+    .works_block
+      label
+        // 各個隱藏高度尺寸
+        .label_wrapper
+          .works_block_content
+            .works_block_content_image_wrapper
+              // 雅莉珊卓 偽圖片
+              img.fack_picture
+                display: none
+
+@media screen and (max-width: 520px)
+  .works.container
+    //- 毛天使、欣湛、瑪莉雅之吻、雅莉珊卓、富盛豐共同設定
+    .works_block
+      label
+        // 各個隱藏高度尺寸 - 瑪莉雅之吻
+        .label_wrapper.brand_maria
+          height: 240px
+          .works_block_content
+            .works_block_content_image_wrapper
+              img.maria
+                height: 120px
+
+@media screen and (max-width: 480px)
+  .works.container
+    //- 毛天使、欣湛、瑪莉雅之吻、雅莉珊卓、富盛豐共同設定
+    .works_block
+      label
+        // 各個隱藏高度尺寸 - 瑪莉雅之吻
+        .label_wrapper
+          height: 240px
+          .works_block_content
+            .works_block_content_image_wrapper
+              img
+                height: 120px
+
+@media screen and (max-width: 435px)
+  .works.container
+    //- 毛天使、欣湛、瑪莉雅之吻、雅莉珊卓、富盛豐共同設定
+    .works_block
+      label
+        // 各個隱藏高度尺寸
+        .label_wrapper
+        .label_wrapper.brand_maria
+          .works_block_content
+            .works_block_content_image_wrapper
+              // 瑪莉雅之吻 偽圖片
+              img.maria.fack_picture:nth-child(21)
+                display: none
+
+
+
+contact
+@media screen and (max-width: 1170px)
+  .contact.container
+    margin-top: 120px
+    //- 下方三區塊
+    .contact_container
+      display: flex
+      justify-content: space-between
+      width: 100%
+      .contact_block
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+        width: 30%
+        text-align: center
+        background-color: $color_white
+        padding: 24px 8px
+        border-radius: 24px
+        box-shadow:1px 1px 24px 1px rgba(#000000, 0.16)
+        img
+          width: 120px
+        pre.contact_block_text
+          font-size: 24px
+          margin: 24px 0 0 0
+          width: 100%
+
+@media screen and (max-width: 1120px)
+  .contact.container
+    //- 下方三區塊
+    .contact_container
+      .contact_block
+        img
+          width: 80px
+        pre.contact_block_text
+          font-size: 16px
+
+@media screen and (max-width: 950px)
+  .contact.container
+    //- 下方三區塊
+    .contact_container
+      .contact_block
+        width: 28%
+        img
+          width: 60px
+        pre.contact_block_text
+          font-size: 14px
+
+@media screen and (max-width: 850px)
+  .contact.container
+    //- 下方三區塊
+    .contact_container
+      .contact_block
+        img
+          width: 48px
+        pre.contact_block_text
+          font-size: 12px
+
+@media screen and (max-width: 780px)
+  .contact.container
+    //- 下方三區塊
+    .contact_container
+      flex-wrap: wrap
+      .contact_block ~ .contact_block
+        margin: 28px 0 0 0
+      .contact_block
+        flex-direction: row
+        align-items: center
+        width: 600px
+        img
+          width: 48px
+          margin: 0 0 0 16px
+        pre.contact_block_text
+          font-size: 20px
+          margin: 0
+
+@media screen and (max-width: 570px)
+  .contact.container
+    //- 下方三區塊
+    .contact_container
+      .contact_block
+        margin: 28px 0 0 0
+        border-radius: 48px
+
+@media screen and (max-width: 480px)
+  .contact.container
+    //- 下方三區塊
+    .contact_container
+      .contact_block ~ .contact_block
+        margin: 20px 0 0 0
+      .contact_block
+        img
+          width: 32px
+          margin: 0 0 0 12px
+        pre.contact_block_text
+          font-size: 16px
+    //- 底部 logo
+    .contact_logo_wrapper
+      position: absolute
+      left: 50%
+      transform: translateX(-50%) scale(2)
+      img.contact_logo
+        width: 50%
+        margin: 80px 20%
+      img.contact_plane
+        width: 30%
+        position: absolute
+        top: 35%
+        left: 70%
+
+@media screen and (max-width: 430px)
+  .contact.container
+    //- 下方三區塊
+    .contact_container
+      .contact_block
+        padding: 8px 4px
+        img
+          width: 28px
+          margin: 0 0 0 12px
+        pre.contact_block_text
+          font-size: 12px
