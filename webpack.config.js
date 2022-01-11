@@ -19,6 +19,11 @@ module.exports = (env) => {
       assetModuleFilename: 'assets/[hash][ext][query]',
     },
     devtool: env.production ? 'source-map' : 'inline-source-map',
+    resolveLoader: {
+      alias: {
+        'pug-loader': '@webdiscus/pug-loader',
+      },
+    },
     module: {
       rules: [
         {
