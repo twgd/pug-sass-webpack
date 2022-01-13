@@ -5,7 +5,6 @@ module.exports = (env) => {
   return {
     mode: env.production ? 'production' : 'development',
     devServer: {
-      watchFiles: ['src/**/*.pug'],
       hot: true,
     },
     context: path.resolve(__dirname, 'src'),
@@ -26,7 +25,10 @@ module.exports = (env) => {
       rules: [
         {
           test: /\.pug$/,
-          use: ['pug-loader'],
+          loader: 'pug-loader',
+          options: {
+            method: 'render',
+          },
         },
         {
           test: /\.css$/i,
@@ -61,7 +63,8 @@ module.exports = (env) => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: './index.pug',
+        title: 'Your app title',
+        template: './index.html',
       }),
     ],
   }
