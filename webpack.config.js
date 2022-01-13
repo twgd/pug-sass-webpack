@@ -63,7 +63,7 @@ module.exports = (env) => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        title: 'Your app title',
+        title: 'killuaZDK',
         template: './index.html',
       }),
     ],
