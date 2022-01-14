@@ -5,7 +5,6 @@ module.exports = (env) => {
   return {
     mode: env.production ? 'production' : 'development',
     devServer: {
-      watchFiles: ['src/**/*.pug'],
       hot: true,
     },
     context: path.resolve(__dirname, 'src'),
@@ -17,11 +16,19 @@ module.exports = (env) => {
       assetModuleFilename: 'assets/[hash][ext][query]',
     },
     devtool: env.production ? 'source-map' : 'inline-source-map',
+    resolveLoader: {
+      alias: {
+        'pug-loader': '@webdiscus/pug-loader',
+      },
+    },
     module: {
       rules: [
         {
           test: /\.pug$/,
-          use: ['pug-loader'],
+          loader: 'pug-loader',
+          options: {
+            method: 'render',
+          },
         },
         {
           test: /\.css$/i,
@@ -40,16 +47,24 @@ module.exports = (env) => {
         },
         {
           test: /\.(png|svg|jpg|jpeg|gif)$/i,
-          type: 'asset/resource',
+          type: 'asset',
           generator: {
             filename: 'images/[hash][ext][query]',
+          },
+        },
+        {
+          test: /\.(woff|woff2|eot|ttf|otf)$/i,
+          type: 'asset/resource',
+          generator: {
+            filename: 'fonts/[name][ext]',
           },
         },
       ],
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: './index.pug',
+        title: 'killuaZDK',
+        template: './index.html',
       }),
     ],
   }

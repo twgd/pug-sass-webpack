@@ -1,5 +1,10 @@
-import './style.sass'
+import { app } from './app'
+import { hmr } from './utils/hmr'
+import './main.sass'
 
-if (module.hot) {
-  module.hot.accept()
-}
+// Hot Module Replacement
+hmr()
+
+window.addEventListener('load', function () {
+  app()
+})

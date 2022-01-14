@@ -1,8 +1,14 @@
+@import './styles/_fonts'
+
 $color_background: #DFE0DB
+$color_hamburger_bg: #4F5052
 $color_pink: #F76BC5
 $color_blue: #3DB5C7
 $color_black: #4F5052
 $color_white: #FFFDF7
+
+$height_nav_lg: 104px
+$height_nav_sm: 72px
 
 // 置中
 @mixin center
@@ -14,6 +20,7 @@ $color_white: #FFFDF7
 // 三大粉紅色標題文字(about\works\contact)
 @mixin large_top_title
   color: $color_pink
+  font-family: 'Julius Sans One', sans-serif
   font-size: 52px
   letter-spacing: 12px
   margin: 0 0 40px 0
@@ -32,7 +39,7 @@ $color_white: #FFFDF7
 
 @mixin small_margin
   margin: 0 20px
-  
+
 
 // 粉紅色標題線
 @mixin line
@@ -44,7 +51,7 @@ $color_white: #FFFDF7
   margin: 3px 0
 
 // 粉紅色標題線旁標題
-@mixin large_title  
+@mixin large_title
   margin: 0 0 0 16px
   font-size: 20px
   letter-spacing: 6px
@@ -71,49 +78,69 @@ body
   vertical-align: middle
   position: relative
   user-select: none
-  font-family: 繁黑體
+  font-family: 'Sen', '儷黑 Pro', 'LiHei Pro', '微軟正黑體', 'Microsoft JhengHei', sans-serif
 
 //- nav
 nav.nav
+  box-shadow: 0px 5px 10px 0px #aaa
+  position: fixed
+  width: 100%
+  height: $height_nav_sm
+  z-index: 12
+  display: flex
+  align-items: center
+  background: $color_background
+
   .nav_content
     display: flex
+    position: relative
     justify-content: space-between
-    margin: 32px 32px
-    .nav_right
+    align-items: center
+    height: 40px
+    width: 100%
+    margin: 0px 32px
+    .nav_left
       img
+        z-index: 2
         width: 60%
         cursor: pointer
-    label
-      input#nav_switch
-        display: none
-      .nav_humburger
-        display: none
-        cursor: pointer
-      .nav_left
-        display: flex
-        .nav_text
+    input#nav_switch
+      display: none
+    .nav_hamburger-lines
+      display: none
+    .menu-items
+      display: flex
+      li
+        list-style: none
+        a.nav_text
+          text-decoration: none
           color: $color_pink
+          font-family: 'Julius Sans One', sans-serif
           font-size: 28px
           letter-spacing: 8px
           cursor: pointer
-        .nav_text ~ .nav_text
-          margin: 0 0 0 40px
+      li ~ li
+        margin: 0 0 0 40px
 
-      input#nav_switch:checked+.nav_left
-        color: red
-        font-size: 100px
+    input#nav_switch:checked+.menu-items
+      color: red
+      font-size: 100px
 
 
 
 //- header
 header.header
-  height: 100vh
+  padding-top: $height_nav_sm
+  height: calc(100vh - $height_nav_sm)
+  margin-bottom: 120px
+
   .header_content
-    position: absolute
-    left: 50%
-    transform: translateX(-50%)
+    width: 60%
+    margin: auto
+    height: 100%
     //- 上方圖logo 圖片區
     .header_top
+      width: 100%
       img.header_top_logo
         width: 70%
         margin: 60px 20%
@@ -125,28 +152,37 @@ header.header
         left: 85%
 
     //- 下方文字區
-    .header_middle
+    .header_bottom
+      width: 100%
       text-align: center
-      .header_middle_content
+      position: absolute
+      bottom: 0
+      margin: 24px 0
+      display: flex
+      flex-direction: column
+      align-items: center
+      .header_bottom_content
         display: flex
         flex-direction: column
         align-items: center
         margin: 0 0 16px 0
-        .header_middle_title
+        .header_bottom_title
           color: $color_blue
           font-size: 18px
           margin: 0 0 8px 0
-        .header_middle_text
+        .header_bottom_text
           font-size: 16px
           margin: 0 0 8px 0
           line-height: 26px
-        .header_middle_text.small_screen
+        .header_bottom_text.small_screen
           display: none
         //- 按鈕
-        img.header_bottom_button
+      .header_bottom_button
+        width: 48px
+        height: 48px
+        img
           width: 48px
           cursor: pointer
-          margin: 40px 0 0 0
 
 // about 和 works 共通設定
 .container
@@ -193,7 +229,7 @@ header.header
         flex-direction: column
         .about_top_detail_wrapper ~ .about_top_detail_wrapper
           margin: 24px 0 0 0
-        .about_top_detail_wrapper  
+        .about_top_detail_wrapper
           width: 100%
           display: flex
           align-items: center
@@ -235,7 +271,7 @@ header.header
     //- 證書
     .about_top_content.certificate
       .about_top_detail
-        .about_top_detail_wrapper  
+        .about_top_detail_wrapper
           .about_top_detail_content
             .about_top_detail_content_block
               .about_top_detail_content_block_botton
@@ -261,7 +297,7 @@ header.header
             margin: 0 28px 0 0
           p.title
             font-size: 20px
-        .year_wrapper 
+        .year_wrapper
           p.year
             +year
       //- 八張圖片_集合
@@ -316,7 +352,7 @@ header.header
               opacity: 0
             .about_other_block_detail_wrapper
               display: flex
-              justify-content: space-between 
+              justify-content: space-between
               width: 100%
               .about_other_block_detail_title_wrapper
                 pre.about_other_block_detail_title
@@ -419,7 +455,7 @@ header.header
               opacity: 0
           .works_block_content_image_wrapper.typesetting_start
             justify-content: flex-start
-            img 
+            img
               margin: 32px 32px 0 0
           .works_block_content_image_wrapper.typesetting_start.img_small_height
             img
@@ -455,7 +491,7 @@ header.header
   .contact_logo_wrapper
     position: absolute
     left: 50%
-    transform: translateX(-50%) 
+    transform: translateX(-50%)
     img.contact_logo
       width: 50%
       margin: 80px 20%
@@ -472,36 +508,99 @@ header.header
 //- nav
 @media screen and (max-width: 770px)
   nav.nav
+    height: $height_nav_sm
     .nav_content
-      margin: 32px 32px
-      .nav_right
+      margin: 0px 32px
+      .nav_left
         img
           width: 60%
-      label
-        input#nav_switch
-        .nav_left
-          display: none
-          .nav_text
-            font-size: 28px
-            letter-spacing: 8px
-          .nav_text ~ .nav_text
-            margin: 0 0 0 40px
-        .nav_humburger
+      input#nav_switch
+        position: absolute
+        display: block
+        height: 32px
+        width: 32px
+        top: 5px
+        right: 5px
+        z-index: 5
+        opacity: 0
+        cursor: pointer
+      .nav_hamburger-lines
+        display: block
+        height: 26px
+        width: 32px
+        position: absolute
+        top: 5px
+        right: 7px
+        z-index: 2
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+        .line
           display: block
-          hr
-            +line
-            margin: 6px 0
-        
+          height: 4px
+          width: 100%
+          border-radius: 10px
+          background: $color_pink
+        .line1
+          transform-origin: 0% 0%
+          transition: transform 0.4s ease-in-out
+        .line2
+          transition: transform 0.2s ease-in-out
+        .line3
+          transform-origin: 0% 100%
+          transition: transform 0.4s ease-in-out
+      .menu-items
+        height: 100vh
+        width: 100vw
+        transform: translate(150%)
+        display: flex
+        flex-direction: column
+        transition: transform 0.5s ease-in-out
+        text-align: center
+        background: $color_hamburger_bg
+        align-items: center
+        justify-content: center
+        position: absolute
+        top: 0
+        left: 0
+        bottom: 0
+        right: 0
+        margin-top: -16px
+        margin-left: -32px
+
+        li ~ li
+          margin: 0 0 0 0px
+        .line
+          display: block
+          height: 2px
+          width: 32px
+          background: $color_blue
+          transform: rotate(-45deg)
+          margin: 30px 0
+
+      input#nav_switch:checked ~ .menu-items
+        transform: translateX(0)
+
+      input#nav_switch:checked ~ .nav_hamburger-lines .line1
+        transform: rotate(45deg)
+
+      input#nav_switch:checked ~ .nav_hamburger-lines .line2
+        transform: scaleY(0)
+
+      input#nav_switch:checked ~ .nav_hamburger-lines .line3
+        transform: rotate(-45deg)
+
 
 //- header
 @media screen and (max-width: 1048px)
   header.header
-    height: 750px
     .header_content
       width: 600px
 
 @media screen and (max-width: 770px)
-  header.header     
+  header.header
+    padding-top: $height_nav_sm
+    margin-bottom: 80px
     .header_content
       width: 530px
 
@@ -515,11 +614,11 @@ header.header
     .header_content
       width: 380px
       //- 下方文字區
-      .header_middle
-        .header_middle_content
-          .header_middle_text.large_screen
+      .header_bottom
+        .header_bottom_content
+          .header_bottom_text.large_screen
             display: none
-          .header_middle_text.small_screen
+          .header_bottom_text.small_screen
             display: block
 
 @media screen and (max-width: 530px)
@@ -527,27 +626,29 @@ header.header
     .header_content
       width: 330px
       //- 下方文字區
-      .header_middle
-        .header_middle_content
-          .header_middle_title
+      .header_bottom
+        .header_bottom_content
+          .header_bottom_title
             font-size: 16px
-          .header_middle_text
+          .header_bottom_text
             font-size: 14px
           //- 按鈕
-          img.header_bottom_button
+        .header_bottom_button
+          width: 40px
+          height: 40px
+          img
             width: 40px
-            margin: 40px 0 0 0
 
 @media screen and (max-width: 430px)
   header.header
     .header_content
       width: 300px
       //- 下方文字區
-      .header_middle
-        .header_middle_content
-          .header_middle_title
+      .header_bottom
+        .header_bottom_content
+          .header_bottom_title
             font-size: 14px
-          .header_middle_text
+          .header_bottom_text
             font-size: 14px
 
 // about 和 works 共通設定
@@ -835,7 +936,7 @@ header.header
                   pre.about_other_block_detail_title
                     font-size: 12px
                     font-weight: 500
-      
+
 @media screen and (max-width: 350px)
   .about.container
     .about_group
@@ -867,9 +968,9 @@ header.header
               img.fack_picture.petangel
                 display: block
               // 雅莉珊卓 偽圖片
-              img.fack_picture:nth-child(13) 
+              img.fack_picture:nth-child(13)
                 display: none
-              img.fack_picture:nth-child(14) 
+              img.fack_picture:nth-child(14)
                 display: none
               // 富盛豐 圖片高度
               img.fu
@@ -888,13 +989,13 @@ header.header
               img.fack_picture.petangel
                 display: block
               // 雅莉珊卓 偽圖片
-              img.fack_picture:nth-child(11) 
+              img.fack_picture:nth-child(11)
                 display: none
-              img.fack_picture:nth-child(12) 
+              img.fack_picture:nth-child(12)
                 display: none
-              img.fack_picture:nth-child(13) 
+              img.fack_picture:nth-child(13)
                 display: none
-              img.fack_picture:nth-child(14) 
+              img.fack_picture:nth-child(14)
                 display: none
 
 @media screen and (max-width: 1062px)
@@ -964,7 +1065,7 @@ header.header
           .works_block_content
             .works_block_content_image_wrapper
               // 瑪莉雅之吻 偽圖片
-              img.maria.fack_picture:nth-child(21) 
+              img.maria.fack_picture:nth-child(21)
                 display: block
             .works_block_content_image_wrapper.typesetting_start.img_small_height
               img
@@ -1034,7 +1135,7 @@ header.header
           .works_block_content
             .works_block_content_image_wrapper
               // 瑪莉雅之吻 偽圖片
-              img.maria.fack_picture:nth-child(21) 
+              img.maria.fack_picture:nth-child(21)
                 display: none
 
 
