@@ -14,8 +14,7 @@ export default function smoothScroll() {
         },
         800,
         function () {
-          // TODO: Add hash (#) to URL when done scrolling (default click behavior)
-          // window.location.hash = hash
+          window.history.replaceState(null, null, `${window.location.origin}/${hash}`)
         }
       )
     }
